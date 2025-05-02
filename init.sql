@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS cart (
     product_id INT,
     user_id INT,
     quantity INT,
-    address VARCHAR(255),
+    address VARCHAR(255),  -- Changed back to 'address'
     FOREIGN KEY (category_id) REFERENCES category(id),
     FOREIGN KEY (product_id) REFERENCES product(id),
     FOREIGN KEY (user_id) REFERENCES user(id)
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS orders (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     product_id INT,
-    delivery_address VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL,  -- Changed from 'delivery_address' to 'address'
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES user(id),
     FOREIGN KEY (product_id) REFERENCES product(id)
@@ -59,8 +59,8 @@ CREATE TABLE IF NOT EXISTS orders (
 -- Insert sample data into user
 INSERT INTO user (name, email, password) VALUES 
 ('Dharma', 'dharma@gmail.com', '12345'),
-('Alice', 'alice@gmail.com', 'password123'),
-('Bob', 'bob@gmail.com', 'securepass');
+('Alice', 'alice@gmail.com', '12345'),
+('Bob', 'bob@gmail.com', '12345');
 
 -- Insert sample data into category
 INSERT INTO category (name) VALUES 
@@ -113,7 +113,7 @@ INSERT INTO cart (amount, category_id, product_id, user_id, quantity, address) V
 (5.99, 3, 21, 1, 5, '123 Main St, City');
 
 -- Insert sample data into orders
-INSERT INTO orders (user_id, product_id, delivery_address) VALUES 
+INSERT INTO orders (user_id, product_id, address) VALUES 
 (1, 1, '123 Main St, City'),
 (2, 11, '456 Oak Ave, Town'),
 (1, 21, '123 Main St, City');
